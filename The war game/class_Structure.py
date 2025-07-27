@@ -1,13 +1,16 @@
+from class_Job import Researcher
+
 class Structure:
     def __init__(self):
         self.durability = 30
         self.battery_cost = 10
+        self.durability_cost = 1
 
 class Freezer(Structure):
     def __init__(self, level = 1):
         super().__init__()
         self.level = level
-        self.battery_cost = 10 + level * 5
+        self.battery_cost = 10 + (level-1) * 5
         self.ice = 0
         self.operator = []
 
@@ -18,7 +21,7 @@ class Freezer(Structure):
 
         for researcher in self.operator:
             if not isinstance(researcher, Researcher):
-                print('머라는거야 씨발')
+                print('머라는거야')
                 return
             if len(researcher.assistants) < researcher.required_assistants:
                 print('보조 수 부족')
@@ -35,6 +38,7 @@ class Storage(Structure):
         super().__init__()
         self.level = level
         self.capabilty = 200 * level
+        self.battery_cost = 10 + (level-1) * 5
         self.food = 0
         self.water = 0
         self.medicine = 0
